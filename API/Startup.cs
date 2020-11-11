@@ -55,9 +55,10 @@ namespace API
             app.UseRouting();            
 
             app.UseCors(policy => policy.AllowAnyHeader()
-                                        .AllowAnyMethod()                                        
-                                        .AllowAnyOrigin() //quitar luego
-            );
+                                        .AllowAnyMethod()
+                                        .AllowCredentials()
+                                        .WithOrigins("https://rpmroller.herokuapp.com",
+                                        "https://localhost:4200"));      
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -68,6 +69,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

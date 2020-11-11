@@ -120,10 +120,10 @@ namespace API.Controllers
             var body = new StringBuilder();
             
             body.Append("<p>Para reestablecer la contraseña de la cuenta presione <a href='");
-            body.Append("http://localhost:4200/account/reset/" + username + "?token=" + token);
+            body.Append("https://localhost:4200/account/reset/" + username + "?token=" + token);
             // body.Append(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/account/reset/" + username + "?token=" + token);
             body.Append("'>aquí</a><br><br>En caso de no poder acceder, copie y pegue el siguiente enlace en su navegador:<br>");
-            body.Append("http://localhost:4200/account/reset/" + username + "?token=" + token);
+            body.Append("https://localhost:4200/account/reset/" + username + "?token=" + token);
             // body.Append(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/account/reset/" + username + "?token=" + token);
             //body.Append(user)
             if( await mailService.SendMail("adfredes@gmail.com","RPM - Reestablecer contraseña",body.ToString())) return NoContent();
@@ -204,10 +204,10 @@ namespace API.Controllers
         //     var email = await accountService.GetUserEmail(username);
         //     var body = new StringBuilder();
         //     body.Append("<p>Para reestablecer la contraseña de la cuenta presione <a href='");
-        //     body.Append("http://localhost:4200/account/reset/" + username + "?token=" + token);
+        //     body.Append("https://localhost:4200/account/reset/" + username + "?token=" + token);
         //     // body.Append(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/account/reset/" + username + "?token=" + token);
         //     body.Append("'>aquí</a><br><br>En caso de no poder acceder, copie y pegue el siguiente enlace en su navegador:<br>");
-        //     body.Append("http://localhost:4200/account/reset/" + username + "?token=" + token);
+        //     body.Append("https://localhost:4200/account/reset/" + username + "?token=" + token);
         //     // body.Append(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + "/account/reset/" + username + "?token=" + token);
         //     //body.Append(user)
         //     if( await mailService.SendMail("adfredes@gmail.com","RPM - Reestablecer contraseña",body.ToString())) return NoContent();
