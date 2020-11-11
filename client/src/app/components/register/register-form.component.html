@@ -1,0 +1,90 @@
+<mdb-card>
+
+    <mdb-card-header class="info-color white-text text-center py-4">
+        <h5>
+            <strong>CREAR CUENTA</strong>
+        </h5>
+    </mdb-card-header>
+
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5 pt-0">
+
+        <!-- Form -->
+        <form [formGroup]="formRegister" (ngSubmit)="submit()" class="text-center" style="color: #757575;">
+
+            <div class="form-row mt-4 text-left mb-2">
+                <div class="col">
+                    <label class="control-label ">Soy :</label>
+                    <label class="radio-inline ml-3" *ngFor="let gender of genders">
+                                <input type="radio" [value]="gender.value" [formControl]="formRegister.controls['genderId']"> {{gender.text}}
+                            </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md">
+                    <app-text-input [formControl]="formRegister.controls['firstName']" [label]="'Nombre'" [type]="'text'" [controlId]="'firstName'"></app-text-input>
+                </div>
+                <div class="col-md">
+                    <!-- Last name -->
+                    <app-text-input [formControl]="formRegister.controls['lastName']" [label]="'Apellido'" [type]="'text'" [controlId]="'lastName'"></app-text-input>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <app-date-input [formControl]="formRegister.controls['dateOfBirth']" [label]="'Fecha Nacimiento'" [type]="'date'" [controlId]="'dateOfBirth'"></app-date-input>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-auto align-middle">
+                    <select [formControl]="formRegister.controls['documentTypeId']" class="form-control">
+                                <option *ngFor="let documentType of documentTypes" [value]="documentType.value">{{documentType.text}}</option>
+                            </select>
+                </div>
+                <div class="col">
+                    <app-text-input [formControl]="formRegister.controls['documentNumber']" [label]="'Documento'" [type]="'text'" [controlId]="'documentNumber'"></app-text-input>
+                </div>
+            </div>
+
+            <div class="md-form mt-0">
+                <app-text-input [formControl]="formRegister.controls['city']" [label]="'Ciudad'" [type]="'text'" [controlId]="'city'"></app-text-input>
+            </div>
+
+            <!-- E-mail -->
+            <div class="md-form mt-0">
+                <app-text-input [formControl]="formRegister.controls['email']" [label]="'Correo'" [type]="'email'" [controlId]="'email'"></app-text-input>
+            </div>
+
+            <div class="md-form mt-0">
+                <app-text-input [formControl]="formRegister.controls['username']" [label]="'Usuario'" [type]="'text'" [controlId]="'username'"></app-text-input>
+            </div>
+            <div class="md-form mt-0">
+                <app-text-input [formControl]="formRegister.controls['password']" [label]="'Contraseña'" [type]="'password'" [controlId]="'password'"></app-text-input>
+            </div>
+            <div class="md-form mt-0 mb-5">
+                <app-text-input [formControl]="formRegister.controls['rePassword']" [label]="'Contraseña'" [type]="'password'" [controlId]="'rePassword'"></app-text-input>
+            </div>
+
+
+
+
+
+
+            <!-- Sign up button -->
+            <div class="form-row">
+                <div class="col">
+                    <button mdbBtn color="primary" outline="true" block="true" class="my-4 btn-rounded" type="submit">Registrarse</button>
+                </div>
+                <div class="col">
+                    <button mdbBtn color="danger" outline="true" block="true" class="my-4 btn-rounded" type="button" (click)="cancel()">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
+        <!-- Form -->
+
+    </mdb-card-body>
+
+</mdb-card>

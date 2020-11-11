@@ -1,0 +1,20 @@
+<ng-container *ngIf="(accountService.currentUser$ | async) === null">
+    <div class="row">
+        <div class="col text-center" *ngIf="!registerMode">
+            <h1>
+                Clases de Rollers
+            </h1>
+            <p class="lead ">Registrate para poder poder reservar tu lugar!</p>
+            <div class="text-center ">
+                <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 ">Registrarse</button>
+                <button class="btn btn-secondary btn-lg ">Learn More</button>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+            <app-register-form (onCancel)="registerToggle($event)" *ngIf="registerMode"></app-register-form>
+        </div>
+    </div>
+
+</ng-container>

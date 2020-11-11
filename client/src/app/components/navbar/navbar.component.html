@@ -1,0 +1,59 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white lighten-1" [containerInside]="false">
+    <!-- Navbar brand -->
+    <mdb-navbar-brand>
+        <a class="navbar-brand" href="#"> <img src="../../../assets/images/logo.png" height="50" class="d-inline-block align-top" alt=""></a>
+    </mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="'active'">
+                <a class="nav-link waves-light" mdbWavesEffect>Inicio</a>
+            </li>
+            <ng-container *ngIf="!(accountService.currentUser$ | async)">
+                <li class="nav-item" routerLinkActive="'active'">
+                    <a class="nav-link waves-light" mdbWavesEffect>Clases</a>
+                </li>
+                <li class="nav-item" routerLinkActive="'active'">
+                    <a class="nav-link waves-light" mdbWavesEffect>Pagos</a>
+                </li>
+            </ng-container>
+        </ul>
+        <!-- Links -->
+
+        <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="(accountService.currentUser$ | async)">
+            <li class="nav-item" *ngIf="1 !== 1">
+                <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
+            </li>
+            <li class="nav-item avatar dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                    <img [src]="(accountService.currentUser$ | async) | images : 'avatar'" alt="" height="40px" width="40px" class="img-fluid rounded-circle z-depth-0 bg-white"></a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mis datos</a>
+                    <a class="dropdown-item waves-light" [routerLink]="['/account/change']" mdbWavesEffect>Cambiar Clave</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Salir</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="!(accountService.currentUser$ | async)">
+            <li class="nav-item" routerLinkActive="'active'">
+                <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/account/login']" routerLinkActive="router-link-active">Ingresar</a>
+            </li>
+            <li class="nav-item" routerLinkActive="'active'">
+                <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/account/register']" routerLinkActive="router-link-active">Registrarse</a>
+            </li>
+        </ul>
+
+        <!-- <form [formGroup]="formLogin" (ngSubmit)="login()" autocomplete="off" class="form-inline waves-light" mdbWavesEffect *ngIf="!(accountService.currentUser$ | async)">
+            <input name="username" formControlName="username" class="form-control mr-sm-2" type="text" placeholder="Username">
+            <input name="password" formControlName="password" class="form-control mr-sm-2" type="password" placeholder="Password">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
+        </form> -->
+    </links>
+    <!-- Collapsible content -->
+</mdb-navbar>
+<!--/.Navbar-->

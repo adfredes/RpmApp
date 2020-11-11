@@ -1,0 +1,11 @@
+<div class="md-form md-outline mt-0">
+
+    <!-- <input [id]="controlId" class="form-control" [bsConfig]="bsConfig" [formControl]="ngControl.control" mdbInput bsDatepicker mdbValidate> -->
+    <input type="text" [class.is-invalid]="ngControl.touched && ngControl.invalid" class="form-control" [formControl]="ngControl.control" [bsConfig]="bsConfig" bsDatepicker mdbValidate mdbInput>
+    <label [for]="controlId">{{label}}</label>
+    <mdb-error *ngIf="isInvalidControl()">
+        <span *ngIf="ngControl.control.errors?.required" class="is-invalid">El campo {{label}} es requerido</span>
+        <span *ngIf="ngControl.control.errors?.minlength" class="is-invalid">{{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}}</span>
+        <span *ngIf="ngControl.control.errors?.maxlength" class="is-invalid">{{label}} must be at most {{ngControl.control.errors.maxlength['requiredLength']}}</span>
+    </mdb-error>
+</div>

@@ -1,0 +1,14 @@
+<div class="md-form md-outline mt-0">
+    <!-- [class.is-invalid]="isInvalidControl()" -->
+    <input [class.is-invalid]="isInvalidControl()" [id]="controlId" [type]="type" class="form-control" [formControl]="ngControl.control" mdbInput mdbValidate>
+    <label [for]="controlId">{{label}}</label>
+    <mdb-error *ngIf="isInvalidControl()">
+        <span *ngIf="ngControl.control.errors?.required" class="is-invalid">El campo {{label}} es requerido</span>
+        <span *ngIf="ngControl.control.errors?.minlength" class="is-invalid">El campo {{label}} debe tener al menos {{ngControl.control.errors.minlength['requiredLength']}} caracteres</span>
+        <span *ngIf="ngControl.control.errors?.maxlength" class="is-invalid">El campo {{label}} no puede tener mas de {{ngControl.control.errors.maxlength['requiredLength']}} caracteres</span>
+        <span *ngIf="ngControl.control.errors?.userExists" class="is-invalid">El usuario ya se encuentra en uso</span>
+        <span *ngIf="ngControl.control.errors?.emailExists" class="is-invalid">El email ya se encuentra registrado</span>
+        <span *ngIf="ngControl.control.errors?.isNotMatching" class="is-invalid">Contraseñas distintas</span>
+        <span *ngIf="ngControl.control.errors?.pattern?.requiredPattern == '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$'" class="is-invalid">La contraseña debe contener mayúsculas, minúsculas y números</span>
+    </mdb-error>
+</div>
