@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,7 @@ namespace API.Data
     public class Seed    
     {
         public static async Task SeedUser(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, DataContext dataContext)
-        {
-            await SeedClass(dataContext);
+        {            
             if (await userManager.Users.AnyAsync()) return;
 
             // Insert Roles
@@ -76,40 +76,40 @@ namespace API.Data
             await userManager.CreateAsync(admin, "Pa$$w0rd");
             await userManager.AddToRolesAsync(admin, new [] {"Admin"});
 
+             await SeedClass(dataContext);
 
         }
 
         public static async Task SeedClass(DataContext dataContext)
         { 
-            if (await dataContext.Class.AnyAsync()){
-                return;
+            // if (await dataContext.Class.AnyAsync()){
+            //     return;
                 
-                var clase = await dataContext.Class
-                                .Include(x => x.StudentsClass)
-                                .FirstOrDefaultAsync(x => x.Id > 1);
+            //     var clase = await dataContext.Class
+            //                     .Include(x => x.StudentsClass)
+            //                     .FirstOrDefaultAsync(x => x.Id > 1);
 
-                var student = await dataContext.Users.FirstOrDefaultAsync(x=> x.Id>3);
+            //     var student = await dataContext.Users.FirstOrDefaultAsync(x=> x.Id>3);
 
-                clase.StudentsClass.Add(
-                    new StudentClass {
-                        Class = clase,
-                        User = student
-                    }
-                );
+            //     clase.StudentsClass.Add(
+            //         new StudentClass {
+            //             Class = clase,
+            //             User = student
+            //         }
+            //     );
                 
                 
-                dataContext.Class.Update(clase);
+            //     dataContext.Class.Update(clase);
                 
-            }
-            else{
+            // }
+            // else{
 
             
                 var clase = new Class
-                {
-                    BeginTime = DateTime.Now,
+                {                    
                     Capacity = 10,
                     DateOfClass = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(60),
+                    Duration = 60,                    
                     LevelId = 1,
                     Quota = 10,
                     TeacherId = 1,
@@ -124,11 +124,11 @@ namespace API.Data
                         User = student
                     }
                 };
-                
                 dataContext.Class.Add(clase);
-            }
-
-            await dataContext.SaveChangesAsync();
+                await dataContext.SaveChangesAsync();
+                
+            //}
+            
         }
 
         

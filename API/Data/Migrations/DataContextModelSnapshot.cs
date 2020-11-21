@@ -168,7 +168,7 @@ namespace API.Data.Migrations
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("url")
+                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -199,22 +199,20 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("BeginTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateOfClass")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Duration")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("LevelId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quota")
+                        .IsConcurrencyToken()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TeacherId")
@@ -277,6 +275,9 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("IsAssist")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("UserId", "ClassId");

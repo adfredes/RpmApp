@@ -67,8 +67,8 @@ namespace API.Controllers
             var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded) return Unauthorized("Usuario o contraseña incorrecta");
-
-            return await CreateUserDto(user);
+            var userDto = await CreateUserDto(user);
+            return userDto;
 
         }
 
@@ -160,7 +160,7 @@ namespace API.Controllers
                 Username = user.UserName,
                 Token = await tokenService.CreateToken(user),
                 KnownAs = user.KnownAs,
-                Avatar = user.Photos != null ? user.Photos.FirstOrDefault(p => p.IsAvatar == true).url : ""
+                Avatar = user.Photos != null ? user.Photos.FirstOrDefault(p => p.IsAvatar == true).Url : ""
             };
         }        
 

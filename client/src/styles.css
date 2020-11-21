@@ -3,3 +3,8 @@
 .btn-rounded {
     border-radius: 30px !important;
 }
+
+timepicker>table>tbody>tr:first-child,
+timepicker>table>tbody>tr:last-child {
+    display: none !important;
+}

@@ -8,6 +8,7 @@ import { CustomFormsModule } from '../_forms/custom-forms.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -23,7 +24,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center'
-    })
+    }),
+    NgxSpinnerModule
   ],
   exports: [
     MdbBootStrapModule,
@@ -31,7 +33,8 @@ import { RouterModule } from '@angular/router';
     RegisterFormComponent,
     PipesModule,
     CustomFormsModule,
-    ToastrModule
+    ToastrModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }

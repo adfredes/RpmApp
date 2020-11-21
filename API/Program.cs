@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Interfaces;
+using API.Retositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +26,7 @@ namespace API
             try{
                 var context = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
-                var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+                var roleManager = services.GetRequiredService<RoleManager<AppRole>>();                
                 await context.Database.MigrateAsync();
                 await Seed.SeedUser(userManager, roleManager, context);
             }catch(Exception ex){

@@ -1,0 +1,42 @@
+<div (click)="toDetail()" class="card text-center h-100 view rgba-white-slight waves-light" mdbWavesEffect>
+    <img [src]="class | images : 'teacherPhotoUrl'" class="card-img-top img-thumbnail mt-3" [alt]="class.teacher">
+    <div class="card-body">
+        <h5 class="card-title">{{class.dateOfClass | date : 'EEEE dd' | titlecase}} de {{class.dateOfClass | date : 'MMMM'}}</h5>
+        <h6>{{class.dateOfClass | date : 'HH:mm'}} HS - <small>{{class.level}}</small></h6>
+        <p>Instructor: <small>{{class.teacher}}</small></p>
+        <p class="card-text"></p>
+        <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
+        <span class="badge badge-primary" *ngIf="class.quota > 0">Disponibles</span>
+        <div *appHasRole="['Student']">
+            <p>Estudiante</p>
+        </div>
+    </div>
+</div>
+
+<!-- <mdb-card class="h-100">
+    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        
+        <mdb-card-img [src]="class | images : 'teacherPhotoUrl'" class="card-img-top img-thumbnail mt-3" alt="..."></mdb-card-img>
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    
+    <mdb-card-body>
+        
+        <mdb-card-title>
+            <h5 class="card-title">{{class.dateOfClass | date : 'EEEE dd' | titlecase}} de {{class.dateOfClass | date : 'MMMM'}}</h5>
+            <h6>{{class.dateOfClass | date : 'HH:mm'}} HS - <small>{{class.level}}</small></h6>
+        </mdb-card-title>
+
+        
+        <mdb-card-text>
+            <p>Instructor: <small>{{class.teacher}}</small></p>
+            <p class="card-text"></p>
+            <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
+            <span class="badge badge-primary" *ngIf="class.quota > 0">Disponibles</span>
+        </mdb-card-text>
+
+        <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
+    </mdb-card-body>
+</mdb-card> -->

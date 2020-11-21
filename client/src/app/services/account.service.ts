@@ -77,9 +77,14 @@ export class AccountService {
     return this.http.get(`${this.apiUrl}account/isuserexists/${username}`);
   }
 
+  getUserId = (user: User): number => {
+    // tslint:disable-next-line: radix
+    return user?.token ? parseInt(this.getDecodedToken(user.token).nameid) : null;
+  }
+
   private setCurrentUser = (user: User) => {
     if (user) {
-      const roles = this.getDecodedToken(user.token);
+      const roles = this.getDecodedToken(user.token).role;
       user.roles = [];
       Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     }

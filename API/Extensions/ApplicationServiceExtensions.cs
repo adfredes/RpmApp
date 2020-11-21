@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using  API.Errors;
+using API.Retositories;
 
 namespace API.Extensions
 {
@@ -21,7 +22,10 @@ namespace API.Extensions
             services.Configure<MailSenderSettings>(config.GetSection("MailSenderSettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IMailService, MailService>();            
+
+            services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>( options => {
@@ -43,6 +47,7 @@ namespace API.Extensions
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+            
             return services;            
         }
         

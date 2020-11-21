@@ -1,0 +1,31 @@
+mdb-card {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: border-box;
+    background-image: url("../../../assets/images/portada.jpg");
+    min-height: 100vh;
+    min-width: 100%;
+    height: auto!important;
+    width: auto!important;
+    padding-top: 80px;
+    border-radius: 0px !important;
+    top: 0px;
+    position: absolute;
+    /*position: absolute;
+    top: 0px;
+    z-index: 1;*/
+}
+
+mdb-card p,
+mdb-card h2,
+mdb-card h6,
+mdb-card h4 {
+    text-shadow: 2px 2px 2px #000;
+}
+
+.bk-opacity {
+    padding: 1rem 0rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.2rem;
+}

@@ -97,7 +97,7 @@ namespace API.Services
                 Username = user.UserName,
                 Token = await tokenService.CreateToken(user),
                 KnownAs = user.KnownAs,
-                Avatar = user.Photos != null ? user.Photos.FirstOrDefault(p => p.IsAvatar == true).url : ""
+                Avatar = user.Photos != null ? user.Photos.FirstOrDefault(p => p.IsAvatar == true).Url : ""
             };
         }
 

@@ -1,0 +1,9 @@
+<div class="md-form md-outline mt-0">
+    <select [class.is-invalid]="isInvalidControl()" class="browser-default custom-select" [id]="controlId" [formControl]="ngControl.control">
+        <option *ngFor="let item of items" [value]="item.value">{{item.text}}</option>
+    </select>
+    <mdb-error *ngIf="isInvalidControl()">
+        <span *ngIf="ngControl.control.errors?.required" class="is-invalid">El campo {{label}} es requerido</span>
+        <span *ngIf="ngControl.control.errors?.min" class="is-invalid">El campo {{label}} es requerido</span>
+    </mdb-error>
+</div>

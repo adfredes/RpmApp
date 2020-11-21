@@ -9,6 +9,7 @@ import { AccountService } from '../../services/account.service';
 export class HomeComponent implements OnInit {
 
   registerMode = false;
+  learnMoreMode = false;
 
   constructor(public accountService: AccountService) { }
 
@@ -16,5 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   registerToggle = () => this.registerMode = !this.registerMode;
+
+  learMoreToggle = () => this.learnMoreMode = !this.learnMoreMode;
 
 }

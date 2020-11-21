@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201110195833_Add Class")]
-    partial class AddClass
+    [Migration("20201112161720_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,7 +170,7 @@ namespace API.Data.Migrations
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("url")
+                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -201,17 +201,14 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("BeginTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateOfClass")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Duration")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("LevelId")
                         .HasColumnType("INTEGER");
@@ -279,6 +276,9 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ClassId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("IsAssist")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("UserId", "ClassId");

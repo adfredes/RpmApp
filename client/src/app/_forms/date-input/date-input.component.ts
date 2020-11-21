@@ -7,9 +7,9 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   styleUrls: ['./date-input.component.css']
 })
 export class DateInputComponent implements ControlValueAccessor {
-  
+
   @Input() label: string;
-  @Input() type = 'text';
+  @Input() type = 'date';
   @Input() controlId: string;
   bsConfig: any = {};
 
@@ -19,7 +19,7 @@ export class DateInputComponent implements ControlValueAccessor {
       dateInputFormat: 'DD/MM/YYYY',
       isAnimated:  true,
       containerClass: 'theme-blue'
-    };    
+    };
   }
 
   writeValue(obj: any): void {

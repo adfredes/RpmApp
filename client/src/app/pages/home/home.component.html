@@ -1,20 +1,57 @@
-<ng-container *ngIf="(accountService.currentUser$ | async) === null">
-    <div class="row">
-        <div class="col text-center" *ngIf="!registerMode">
-            <h1>
-                Clases de Rollers
-            </h1>
-            <p class="lead ">Registrate para poder poder reservar tu lugar!</p>
-            <div class="text-center ">
-                <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 ">Registrarse</button>
-                <button class="btn btn-secondary btn-lg ">Learn More</button>
+<mdb-card>
+    <div class="text-white text-center py-5 px-4 my-5">
+        <div *ngIf="!registerMode">
+            <h2 class="card-title h1-responsive pt-3 mb-1 font-bold"><strong>Clases de Rollers</strong></h2>
+            <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+                <p class="mx-5 mb-5">Registrate para poder poder reservar tu lugar!
+                </p>
+            </ng-container>
+            <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+                <div class="text-center ">
+                    <a mdbBtn (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 btn-rounded">
+                        Registrarse</a>
+                    <a mdbBtn (click)="learMoreToggle()" class="btn btn-success btn-lg btn-rounded">{{learnMoreMode ? 'Leer menos' : 'Leer Mas'}}</a>
+                </div>
+            </ng-container>
+            <div class="d-inline-block w-auto bk-opacity mt-5 animated fadeIn fast" *ngIf="!registerMode && learnMoreMode || (accountService.currentUser$ | async) !== null">
+                <h4>Te esperamos para vivir una experiencia única</h4>
+                <h6 class="mx-5 mb-5">Aprendé a patinar en nuestra escuela de rollers</h6>
+                <p class="mx-5">Niveles: Principiantes / Intermedios / Avanzados /Freestyle / Slalom.</p>
+                <p class="mx-5">Aprendé a patinar de lunes a viernes a las 19hs . Cupos Limitados</p>
+                <p class="mx-5">Julieta Lanteri 1750 – Puerto Madero – Capital Federal</p>
+                <p class="mx-5">Registrate para poder poder reservar tu lugar!
+            </div>
+
+        </div>
+        <div class="container animated fast fadeIn" *ngIf="registerMode">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-6">
+                    <app-register-form (onCancel)="registerToggle($event)"></app-register-form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-10 col-md-8 col-lg-6">
-            <app-register-form (onCancel)="registerToggle($event)" *ngIf="registerMode"></app-register-form>
+</mdb-card>
+
+<!-- <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center" *ngIf="!registerMode">
+                <h1>
+                    Clases de Rollers
+                </h1>
+                <p class="lead ">Registrate para poder poder reservar tu lugar!</p>
+                <div class="text-center ">
+                    <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 ">Registrarse</button>
+                    <button class="btn btn-secondary btn-lg ">Learn More</button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-10 col-md-8 col-lg-6">
+                <app-register-form (onCancel)="registerToggle($event)" *ngIf="registerMode"></app-register-form>
+            </div>
         </div>
     </div>
-
-</ng-container>
+</ng-container> -->

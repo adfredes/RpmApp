@@ -1,0 +1,38 @@
+<div class="container" *ngIf="class">
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3 animated fadeIn" *ngFor="let subscription of class.studentsSubscription">
+            <div class="card h-100" [class.border-danger]="!subscription.isAssist" [class.border-primary]="subscription.isAssist">
+                <img [src]="subscription | images : 'avatar'" class="card-img-top img-thumbnail mt-3">
+                <div class="card-body">
+                    <h5 class="card-title text-center text-capitalize">{{subscription.name}}</h5>
+                    <h6 *ngIf="subscription.isAssist !== null" class="card-subtitle mb-2 text-muted">{{subscription.isAssist ? 'Asistio' : 'No Asistio'}}</h6>
+                    <div class="row" *appHasRole="['Teacher']">
+                        <div class="col-6">
+                            <button mdbBtn [disabled]="subscription.isAssist === true" color="primary" outline="true" block="true" class="btn-rounded mb-1" type="button" (click)="setAsist(true, subscription.studentId )"><mdb-icon fas icon="check"></mdb-icon></button>
+                        </div>
+                        <div class="col-6">
+                            <button mdbBtn [disabled]="subscription.isAssist === false" color="danger" outline="true" block="true" class="btn-rounded" type="button" (click)="setAsist(false, subscription.studentId )"><mdb-icon fas icon="times"></mdb-icon></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col" *ngIf="class">
+            <app-class-card *ngIf="class" [class]="class"></app-class-card>
+            <p>Cupos: {{class.quota}}</p>
+            <div *appHasRole="['Student']">
+                <button *ngIf="!isSubscript" (click)="subscribe()">Inscribirme</button>
+                <button *ngIf="isSubscript" (click)="unsubscribe()">Desuscribirse</button>
+            </div>
+        </div>
+    </div>
+</div>
