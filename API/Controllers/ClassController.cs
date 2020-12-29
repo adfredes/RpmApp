@@ -32,7 +32,7 @@ namespace API.Controllers
         public async Task<ActionResult<PagedList<ClassDto>>> GetClasses([FromQuery] ClassParams classParams)
         {
             var classes = await unitOfWork.ClassRepository.GetClassesAsync(classParams);
-            Response.AddPaginationHeader<ClassDto>(classes);
+            Response.AddPaginationHeader(classes);
             return classes;
         }
 

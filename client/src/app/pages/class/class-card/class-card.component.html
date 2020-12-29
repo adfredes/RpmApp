@@ -1,42 +1,48 @@
-<div (click)="toDetail()" class="card text-center h-100 view rgba-white-slight waves-light" mdbWavesEffect>
+<div class="card text-center h-100 view rgba-white-slight waves-light">
     <img [src]="class | images : 'teacherPhotoUrl'" class="card-img-top img-thumbnail mt-3" [alt]="class.teacher">
     <div class="card-body">
         <h5 class="card-title">{{class.dateOfClass | date : 'EEEE dd' | titlecase}} de {{class.dateOfClass | date : 'MMMM'}}</h5>
         <h6>{{class.dateOfClass | date : 'HH:mm'}} HS - <small>{{class.level}}</small></h6>
         <p>Instructor: <small>{{class.teacher}}</small></p>
-        <p class="card-text"></p>
-        <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
-        <span class="badge badge-primary" *ngIf="class.quota > 0">Disponibles</span>
-        <div *appHasRole="['Student']">
-            <p>Estudiante</p>
-        </div>
+        <p class="card-text">
+            <ng-container *ngIf="!isClose; else isCloseTemplate">
+                <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
+                <span class="badge badge-primary" *ngIf="class.quota > 0">Disponibles</span>
+            </ng-container>
+            <ng-template #isCloseTemplate>
+                <span class="badge badge-danger">Cerrado</span>
+            </ng-template>
+        </p>
+
     </div>
+    <ul class="list-inline member-icons animate text-center">
+        <ng-container *appHasRole="['School','Admin','Teacher']">
+            <li class="list-inline-item" (click)="toDetail()">
+                <button class="btn btn-success waves-light" mdbTooltip="Ver" placement="top" mdbWavesEffect>
+                    <i class="fa fa-eye"></i>
+                </button>
+            </li>
+
+            <li class="list-inline-item" *ngIf="!isClose">
+                <button class="btn btn-success waves-light" (click)="openEditModal()" mdbTooltip="Modificar" placement="top" mdbWavesEffect>
+                    <i class="fa fa-edit"></i>
+                </button>
+            </li>
+
+            <li class="list-inline-item" *ngIf="!isClose">
+                <button class="btn btn-danger waves-light" mdbTooltip="Suspender" placement="top" mdbWavesEffect>
+                    <i class="fa fa-times"></i>
+                </button>
+            </li>
+        </ng-container>
+
+        <ng-container *appHasRole="['Student']">
+            <li class="list-inline-item" (click)="toDetail()" *ngIf="!isClose">
+                <button class="btn btn-success waves-light" mdbWavesEffect>
+                    <i class="fa fa-edit" [class.fa-edit]="!isClose && class.quota > 0" [class.fa-eye]="isClose || class.quota < 1"></i> 
+                    {{!isClose && class.quota > 0 ? 'Reservar' : 'Ver'}}
+                </button>
+            </li>
+        </ng-container>
+    </ul>
 </div>
-
-<!-- <mdb-card class="h-100">
-    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-        
-        <mdb-card-img [src]="class | images : 'teacherPhotoUrl'" class="card-img-top img-thumbnail mt-3" alt="..."></mdb-card-img>
-        <a>
-            <div class="mask"></div>
-        </a>
-    </div>
-    
-    <mdb-card-body>
-        
-        <mdb-card-title>
-            <h5 class="card-title">{{class.dateOfClass | date : 'EEEE dd' | titlecase}} de {{class.dateOfClass | date : 'MMMM'}}</h5>
-            <h6>{{class.dateOfClass | date : 'HH:mm'}} HS - <small>{{class.level}}</small></h6>
-        </mdb-card-title>
-
-        
-        <mdb-card-text>
-            <p>Instructor: <small>{{class.teacher}}</small></p>
-            <p class="card-text"></p>
-            <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
-            <span class="badge badge-primary" *ngIf="class.quota > 0">Disponibles</span>
-        </mdb-card-text>
-
-        <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
-    </mdb-card-body>
-</mdb-card> -->

@@ -3,11 +3,11 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Class } from 'src/app/models/class.interface';
 import { ClassService } from 'src/app/services/class.service';
-import { AccountService } from '../../../services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/models/user.interface';
-import { BussyService } from '../../../services/bussy.service';
+import { BussyService } from 'src/app/services/bussy.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-class-detail',
@@ -18,15 +18,21 @@ export class ClassDetailComponent implements OnInit, OnDestroy {
   class: Class;
   isSubscript: boolean;
   private classSubcription: Subscription;
-  private userId: number;
+  userId: number;
+  isClose: boolean;
+  viewStudents = false;
 
   constructor(private classService: ClassService, private accountService: AccountService,
               private toastr: ToastrService, private bussyService: BussyService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private location: Location) {
+    this.bussyService.busy();
     this.classSubcription = this.classService.onlineClass$
       .subscribe(leason => {
         this.class = leason;
-        this.isSubscript =  leason.studentsSubscription.some(s => s.studentId === this.userId);        
+        this.isSubscript =  leason.studentsSubscription.some(s => s.studentId === this.userId);
+        this.viewStudents = leason.studentsSubscription?.length > 0 ? true : false;
+        this.isClose = new Date(this.class.dateOfClass) < new Date();
+        this.bussyService.iddle();
       });
 
     this.accountService.currentUser$.pipe(take(1))
@@ -66,6 +72,10 @@ export class ClassDetailComponent implements OnInit, OnDestroy {
     this.classService.setStudentAsist(this.class.id, studentId, isAsist)
     .then()
     .finally(() => this.bussyService.iddle());
+  }
+
+  goBack = () => {
+    this.location.back();
   }
 
   ngOnInit(): void {

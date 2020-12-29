@@ -19,7 +19,7 @@ namespace API.Retositories
 
         public ILevelRepository LevelRepository => new LevelRepository(context, mapper);
 
-        public IMemberRepository MemberRepository => new MemberRepository(context, mapper);
+        public IMemberRepository MemberRepository => new MemberRepository(context, mapper);        
 
         public async Task<bool> Complete()
         {

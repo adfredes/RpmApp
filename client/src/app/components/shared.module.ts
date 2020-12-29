@@ -9,11 +9,13 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FileUploadModule } from 'ng2-file-upload';
+import { HasRoleDirective } from 'src/app/directives/has-role.directive';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, RegisterFormComponent],
+  declarations: [NavbarComponent, RegisterFormComponent, HasRoleDirective],
   imports: [
     CommonModule,
     MdbBootStrapModule,
@@ -25,7 +27,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center'
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FileUploadModule
   ],
   exports: [
     MdbBootStrapModule,
@@ -34,7 +37,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     PipesModule,
     CustomFormsModule,
     ToastrModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FileUploadModule,
+    HasRoleDirective
   ]
 })
 export class SharedModule { }

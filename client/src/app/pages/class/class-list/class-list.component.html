@@ -9,21 +9,30 @@
                     <form [formGroup]="formSearch" (ngSubmit)="searchClasses()" class="text-center" style="color: #757575;">
 
                         <div class="form-row">
-                            <div class="col pt-2">
+                            <div class="col-md">
                                 <app-date-input label="Desde" controlId="desde" [formControl]="formSearch.get('beginDate')"></app-date-input>
                             </div>
-                            <div class="col pt-2">
+                            <div class="col-md">
                                 <app-date-input label="Hasta" controlId="hasta" [formControl]="formSearch.get('endDate')"></app-date-input>
                             </div>
-                            <div class="col pt-2">
+                            <div class="col-md">
                                 <app-select-input [formControl]="formSearch.get('levelId')" [label]="'Nivel'" [controlId]="'levelId'" [items]="levels"></app-select-input>
                             </div>
-                            <div class="col pt-2">
+                            <div class="col-md">
                                 <app-select-input [formControl]="formSearch.get('teacherId')" [label]="'Instructor'" [controlId]="'teacherId'" [items]="teachers"></app-select-input>
                             </div>
-                            <div class="col-2">
-                                <button mdbBtn type="submit" color="primary" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2">
+                            <div class="col-lg">
+                                <div>
+                                    <div class="float-left w-50">
+                                        <button mdbBtn type="submit" color="primary" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2 btn-block">
                             <mdb-icon fas icon="search"></mdb-icon></button>
+                                    </div>
+                                    <div class="float-right w-50" *appHasRole="['School','Admin','Teacher']">
+                                        <button mdbBtn type="button" color="success" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2 btn-block" (click)="openAddModal()">
+                                            <mdb-icon fas icon="plus"></mdb-icon>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

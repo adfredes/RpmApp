@@ -1,6 +1,6 @@
 <div class="md-form md-outline mt-0">
 
-    <timepicker [showMeridian]="false" [arrowkeys]="false" [mousewheel]="true" [class.is-invalid]="isInvalidControl()" [formControl]="ngControl.control"></timepicker>
+    <timepicker [class.validate-error]="isInvalidControl()" [showMeridian]="false" [arrowkeys]="false" [mousewheel]="true" [class.is-invalid]="isInvalidControl()" [formControl]="ngControl.control"></timepicker>
     <mdb-error *ngIf="isInvalidControl()">
         <span *ngIf="ngControl.control.errors?.required" class="is-invalid">El campo {{label}} es requerido</span>
         <span *ngIf="ngControl.control.errors?.minlength" class="is-invalid">{{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}}</span>

@@ -32,6 +32,7 @@
                             "./node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
                             "./node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
                             "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/ngx-bootstrap/tabs/tabs.css",
                             "./node_modules/ngx-toastr/toastr.css",
                             "src/styles.css"
                         ],

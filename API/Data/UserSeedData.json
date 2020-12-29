@@ -187,5 +187,24 @@
             "IsMain": true,
             "IsAvatar": true
         }]
+    },
+    {
+        "UserName": "admin",
+        "GenderId": 1,
+        "DocumentTypeId": 1,
+        "DocumentNumber": "111111",
+        "DateOfBirth": "1901-01-01",
+        "KnownAs": "Admin",
+        "Created": "2020-06-24",
+        "LastActive": "2020-06-21",
+        "FirstName": "Admin",
+        "LastName": "Admin",
+        "City": "Greenbush",
+        "LevelId": 1,
+        "Photos": [{
+            "Url": "https://randomuser.me/api/portraits/women/54.jpg",
+            "IsMain": true,
+            "IsAvatar": true
+        }]
     }
 ]

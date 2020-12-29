@@ -1,0 +1,8 @@
+<div class="card text-center h-100 view rgba-white-slight waves-light" mdbWavesEffect>
+    <img [src]="member | images : 'photoUrl'" class="card-img-top " [alt]="null">
+    <div class="card-body">
+        <h5 class="card-title">{{member.firstName}} {{member.lastName}}, <small>{{member.age}}</small></h5>
+        <h6>{{member.level}}</h6>
+        <p><small>Miembro desde {{member.created | date : 'dd MMM yy'}}</small></p>
+    </div>
+</div>

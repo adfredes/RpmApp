@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.interface';
+import { User } from 'src/app/models/user.interface';
+import { SelectCombo } from 'src/app/models/select-combo.interface';
+import { UserAccount } from 'src/app/models/user-account.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +82,14 @@ export class AccountService {
   getUserId = (user: User): number => {
     // tslint:disable-next-line: radix
     return user?.token ? parseInt(this.getDecodedToken(user.token).nameid) : null;
+  }
+
+  getRoles = () => {
+    return this.http.get<SelectCombo[]>(`${this.apiUrl}admin/roles`);
+  }
+
+  getUsers = () => {
+    return this.http.get<UserAccount[]>(`${this.apiUrl}admin/users`);
   }
 
   private setCurrentUser = (user: User) => {

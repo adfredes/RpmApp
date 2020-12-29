@@ -1,0 +1,19 @@
+.nav-link.active,
+.show>.nav-link {
+    background-color: transparent !important;
+    color: inherit !important;
+    border-radius: 0px !important;
+    border-bottom: 5px red solid;
+    font-weight: bolder;
+}
+
+.nav-link:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+    border-radius: 0px !important;
+    border-bottom: 5px rgba(255, 0, 0, 0.2) solid;
+}
+
+ul.nav {
+    border-bottom: #ccc 1px solid;
+}

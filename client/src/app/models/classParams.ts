@@ -1,4 +1,3 @@
-import { DATE } from 'ngx-bootstrap/chronos/units/constants';
 import { PaginationParams } from './paginationParams';
 export class ClassParams extends PaginationParams{
     studentId?: number;

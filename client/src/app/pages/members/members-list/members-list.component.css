@@ -1,0 +1,14 @@
+.img-thumbnail {
+    height: 50px;
+    width: 50px;
+    padding: 0px;
+    border-radius: 50%;
+}
+
+.img-thumbnail:hover {
+    border-radius: 0px;
+}
+
+tbody td {
+    line-height: 50px;
+}

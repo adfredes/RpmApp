@@ -6,7 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OptionsService } from 'src/app/services/options.service';
 import { SelectCombo } from 'src/app/models/select-combo.interface';
 import { take } from 'rxjs/operators';
-import { Pagination } from '../../../models/pagination';
+import { Pagination } from 'src/app/models/pagination';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalAddComponent } from '../modals/modal-add.component';
+import { ModalEditComponent } from '../modals/modal-edit.component';
 
 
 
@@ -27,7 +30,7 @@ export class ClassListComponent implements OnInit {
   onScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + 1000;
     const max = (document.documentElement.scrollHeight || document.body.scrollHeight);
-    console.log(pos, max, this.loading, this.pagination.currentPage, this.pagination.totalPages);
+
     if (pos > max && !this.loading && this.pagination.currentPage < this.pagination.totalPages) {
       this.classService.searchParams.pageNumber += this.classService.searchParams.pageNumber;
       this.loadClasses();
@@ -35,11 +38,15 @@ export class ClassListComponent implements OnInit {
   }
 
   constructor(private classService: ClassService, private fb: FormBuilder,
-              private optionsService: OptionsService) {
+              private optionsService: OptionsService, private modalService: BsModalService) {
     this.loadLevels();
     this.loadTeachers();
     this.createForm();
     this.searchClasses();
+  }
+
+  openAddModal = () => {
+    this.modalService.show(ModalAddComponent);
   }
 
   private loadLevels = () =>

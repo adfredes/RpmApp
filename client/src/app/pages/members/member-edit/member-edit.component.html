@@ -1,1 +1,110 @@
-<p>member-edit works!</p>
+<div class="container mt-2" *ngIf="member">
+    <div class="row">
+        <div class="col-12">
+            <h1>Tu Perfil</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img [src]="member | images : 'photoUrl'" [alt]="member.knownAs" class="card-img-top img-thumbnail">
+                <div class="card-body">
+                    <div>
+                        <strong>Ciudad:</strong>
+                        <p>{{member.city}}</p>
+                    </div>
+                    <div>
+                        <strong>Edad:</strong>
+                        <p>{{member.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Ultima Conexión:</strong>
+                        <p>{{member.lastActive | date: 'dd MMMM yy'}}</p>
+                        <!-- <p>{{member.lastActive | timeago}}</p> -->
+                    </div>
+                    <div>
+                        <strong>Miembro desde:</strong>
+                        <p>{{member.created | date: 'dd MMMM yy'}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button [disabled]="!editForm.dirty || editForm.invalid" form="editForm" class="btn btn-success btn-block" type="submit" (click)="submit()">Guardar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="tabSelected == 0" (click)="tabSelected=0">Mis Datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="tabSelected == 1" (click)="tabSelected=1">Editar Fotos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="tabSelected == 2" (click)="tabSelected=2">Subir Fotos</a>
+                </li>
+            </ul>
+            <div class="row" [ngSwitch]="tabSelected">
+                <div class="col" *ngSwitchCase="0">
+                    <form [formGroup]="editForm" (ngSubmit)="submit()" name="editForm">
+                        <div class="form-row mt-4 text-left mb-2">
+                            <div class="col">
+                                <label class="control-label ">Soy :</label>
+                                <label class="radio-inline ml-3" *ngFor="let gender of genders">
+                                            <input type="radio" [value]="gender.value" [formControl]="editForm.controls['genderId']"> {{gender.text}}
+                                        </label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md">
+                                <app-text-input [formControl]="editForm.controls['firstName']" [label]="'Nombre'" [type]="'text'" [controlId]="'firstName'"></app-text-input>
+                            </div>
+                            <div class="col-md">
+                                <!-- Last name -->
+                                <app-text-input [formControl]="editForm.controls['lastName']" [label]="'Apellido'" [type]="'text'" [controlId]="'lastName'"></app-text-input>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <app-date-input [formControl]="editForm.controls['dateOfBirth']" [label]="'Fecha Nacimiento'" [type]="'date'" [controlId]="'dateOfBirth'"></app-date-input>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-auto align-middle">
+                                <select [formControl]="editForm.controls['documentTypeId']" class="form-control">
+                                            <option *ngFor="let documentType of documentTypes" [value]="documentType.value">{{documentType.text}}</option>
+                                        </select>
+                            </div>
+                            <div class="col">
+                                <app-text-input [formControl]="editForm.controls['documentNumber']" [label]="'Documento'" [type]="'text'" [controlId]="'documentNumber'"></app-text-input>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-0">
+                            <div class="col">
+                                <app-text-input [formControl]="editForm.controls['city']" [label]="'Ciudad'" [type]="'text'" [controlId]="'city'"></app-text-input>
+                            </div>
+                            <div class="col">
+                                <app-text-input [formControl]="editForm.controls['phoneNumber']" [label]="'Celular'" [type]="'text'" [controlId]="'phoneNumber'"></app-text-input>
+                            </div>
+                        </div>
+
+                        <!-- E-mail -->
+                        <!-- <div class="md-form mt-0">
+                            <app-text-input [formControl]="editForm.controls['email']" [label]="'Correo'" [type]="'email'" [controlId]="'email'"></app-text-input>
+                        </div> -->
+
+                    </form>
+                </div>
+                <div class="col" *ngSwitchCase="1">
+                    <app-photo-editor [member]="member"></app-photo-editor>
+                </div>
+                <div class="col" *ngSwitchCase="2">
+                    <app-photo-add [member]="member"></app-photo-add>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

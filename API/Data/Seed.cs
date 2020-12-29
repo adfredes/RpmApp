@@ -64,17 +64,24 @@ namespace API.Data
             foreach(var user in users){
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(user, "Student");
+
+                string role = user.UserName.ToLower() switch
+                {
+                    "admin" => "Admin",
+                    "karen" => "Teacher",
+                    _ => "Student",
+                };                
+                await userManager.AddToRoleAsync(user, role);
             }
 
 
             //creo usuario admin
-            var admin = new AppUser
-            {
-                UserName = "admin"
-            };
-            await userManager.CreateAsync(admin, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(admin, new [] {"Admin"});
+            // var admin = new AppUser
+            // {
+            //     UserName = "admin"
+            // };
+            // await userManager.CreateAsync(admin, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(admin, new [] {"Admin"});
 
              await SeedClass(dataContext);
 
@@ -82,33 +89,13 @@ namespace API.Data
 
         public static async Task SeedClass(DataContext dataContext)
         { 
-            // if (await dataContext.Class.AnyAsync()){
-            //     return;
-                
-            //     var clase = await dataContext.Class
-            //                     .Include(x => x.StudentsClass)
-            //                     .FirstOrDefaultAsync(x => x.Id > 1);
-
-            //     var student = await dataContext.Users.FirstOrDefaultAsync(x=> x.Id>3);
-
-            //     clase.StudentsClass.Add(
-            //         new StudentClass {
-            //             Class = clase,
-            //             User = student
-            //         }
-            //     );
-                
-                
-            //     dataContext.Class.Update(clase);
-                
-            // }
-            // else{
+         return;   
 
             
                 var clase = new Class
                 {                    
                     Capacity = 10,
-                    DateOfClass = DateTime.Now,
+                    DateOfClass = DateTime.Now.AddDays(5),
                     Duration = 60,                    
                     LevelId = 1,
                     Quota = 10,

@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar roles de {{user.userName | titlecase}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="form-check" *ngFor="let role of roles">
+        <input [id]="role.text" type="checkbox" class="form-check-input" [value]="role.text" [checked]="role.value" (change)="role.value = !role.value" [disabled]="role.text === 'Admin' && user.userName === 'admin'">
+        <label [for]="role.text">{{role.text}}</label>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="form-row">
+        <div class="col">
+            <button mdbBtn color="primary" outline="true" block="true" class="btn-rounded" type="button" (click)="updateRoles()">Guardar</button>
+        </div>
+        <div class="col">
+            <button mdbBtn color="danger" outline="true" block="true" class="btn-rounded" type="button" (click)="bsModalRef.hide()">Cancelar</button>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { RegisterComponent } from './pages/account/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ChangePasswordComponent } from './pages/account/change-password/change-password.component';
@@ -10,6 +10,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { ClassListComponent } from './pages/class/class-list/class-list.component';
 import { ClassAddComponent } from './pages/class/class-add/class-add.component';
 import { ClassDetailComponent } from './pages/class/class-detail/class-detail.component';
+import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AccountsListComponent } from './pages/account/accounts-list/accounts-list.component';
+import { MembersListComponent } from './pages/members/members-list/members-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,7 +24,8 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'change', component: ChangePasswordComponent, canActivate: [AuthGuard] },
       { path: 'reset/:username', component: ResetPasswordComponent},
-      { path: 'forgot', component: ForgotPasswordComponent}
+      { path: 'forgot', component: ForgotPasswordComponent},
+      { path: 'list', component: AccountsListComponent, canActivate: [AdminGuard]}
     ]
   },
   {
@@ -31,7 +36,16 @@ const routes: Routes = [
       { path: 'add', component: ClassAddComponent},
       { path: 'detail/:id', component: ClassDetailComponent}
     ]
-  }
+  },
+  {
+    path: 'members',
+    canActivate: [AuthGuard],
+    children: [
+      {path: 'edit', component: MemberEditComponent},
+      {path: 'list', component: MembersListComponent}
+    ]
+  },
+  
 ];
 
 @NgModule({

@@ -26,14 +26,21 @@ import { ClassCardComponent } from './pages/class/class-card/class-card.componen
 import { ClassListComponent } from './pages/class/class-list/class-list.component';
 import { ClassDetailComponent } from './pages/class/class-detail/class-detail.component';
 import { ClassAddComponent } from './pages/class/class-add/class-add.component';
-import { HasRoleDirective } from './directives/has-role.directive';
+import { PhotoAddComponent } from './pages/members/photo-add/photo-add.component';
+import { ModalAddComponent } from './pages/class/modals/modal-add.component';
+import { AccountsListComponent } from './pages/account/accounts-list/accounts-list.component';
+import { AccountModalComponent } from './pages/account/account-modal/account-modal.component';
+import { MembersListComponent } from './pages/members/members-list/members-list.component';
+import { MemberCardComponent } from './pages/members/member-card/member-card.component';
+import { ClassFormComponent } from './pages/class/class-form/class-form.component';
+import { ModalEditComponent } from './pages/class/modals/modal-edit.component';
 
 registerLocaleData(localEsAr);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,    
+    HomeComponent,
     PagosComponent,
     ChangePasswordComponent,
     ResetPasswordComponent,
@@ -42,12 +49,19 @@ registerLocaleData(localEsAr);
     LoginComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    PhotoAddComponent,
     ClassEditComponent,
     ClassCardComponent,
     ClassListComponent,
     ClassDetailComponent,
     ClassAddComponent,
-    HasRoleDirective
+    ModalAddComponent,
+    AccountsListComponent,
+    AccountModalComponent,
+    MembersListComponent,
+    MemberCardComponent,
+    ClassFormComponent,
+    ModalEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<form [formGroup]="formClass" (ngSubmit)="submit()">
+    <div class="form-row">
+        <div class="col">
+            <app-date-input [formControl]="formClass.controls['dateOfClass']" [label]="'Fecha'" [type]="'date'" [controlId]="'dateOfClass'"></app-date-input>
+        </div>
+        <div class="float-right">
+            <app-time-input [formControl]="formClass.controls['beginTime']" [label]="'Hora'"></app-time-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <app-text-input [formControl]="formClass.controls['duration']" [type]="'number'" [label]="'Duracion'" [controlId]="'duration'"></app-text-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <app-text-input [formControl]="formClass.controls['capacity']" [type]="'number'" [label]="'Capacidad'" [controlId]="'capacity'"></app-text-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <app-select-input [formControl]="formClass.get('levelId')" [label]="'Nivel'" [controlId]="'levelId'" [items]="levels"></app-select-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <app-select-input [formControl]="formClass.get('teacherId')" [label]="'Instructor'" [controlId]="'teacherId'" [items]="teachers"></app-select-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <button mdbBtn [disabled]="formClass.invalid" color="primary" outline="true" block="true" class="my-4 btn-rounded" type="submit"><mdb-icon fas icon="save"></mdb-icon> Guardar</button>
+        </div>
+        <div class="col">
+            <button mdbBtn color="danger" outline="true" block="true" class="my-4 btn-rounded" type="button" (click)="cancel()">Cancelar</button>
+        </div>
+    </div>
+</form>

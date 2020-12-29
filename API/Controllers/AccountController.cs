@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Extensions;
 using System.Text;
 using System.Web;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -23,17 +24,20 @@ namespace API.Controllers
         private readonly IMapper mapper;
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly RoleManager<AppRole> roleManager;
         private readonly IMailService mailService;
 
         public AccountController(ITokenService tokenService,
                                 IMapper mapper,
                                 UserManager<AppUser> userManager,
                                 SignInManager<AppUser> signInManager,
+                                RoleManager<AppRole> roleManager,
                                 IMailService mailService){
             this.tokenService = tokenService;
             this.mapper = mapper;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.mailService = mailService;
         }
 
@@ -162,7 +166,7 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Avatar = user.Photos != null ? user.Photos.FirstOrDefault(p => p.IsAvatar == true).Url : ""
             };
-        }        
+        }                
 
         // [HttpPost("register")]
         // public async Task<ActionResult<UserDto>> Register (RegisterDto registerDto)

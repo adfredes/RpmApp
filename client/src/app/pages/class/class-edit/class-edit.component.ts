@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Class } from 'src/app/models/class.interface';
 
 @Component({
   selector: 'app-class-edit',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./class-edit.component.css']
 })
 export class ClassEditComponent implements OnInit {
+  @Input() clase: Class;
+  @Output() onClose = new EventEmitter();
+
 
   constructor() { }
 

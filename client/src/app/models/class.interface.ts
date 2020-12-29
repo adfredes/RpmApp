@@ -5,6 +5,7 @@ export interface Class{
     level: string;
     capacity: number;
     quota: number;
+    teacherId: number;
     teacher: string;
     teacherPhotoUrl: string;
     studentsSubscription: StudenSubscription[];

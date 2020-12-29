@@ -1,5 +1,5 @@
 <div class="md-form md-outline mt-0">
-    <select [class.is-invalid]="isInvalidControl()" class="browser-default custom-select" [id]="controlId" [formControl]="ngControl.control">
+    <select [class.validate-error]="isInvalidControl()" [class.is-invalid]="isInvalidControl()" class="browser-default custom-select" [id]="controlId" [formControl]="ngControl.control">
         <option *ngFor="let item of items" [value]="item.value">{{item.text}}</option>
     </select>
     <mdb-error *ngIf="isInvalidControl()">

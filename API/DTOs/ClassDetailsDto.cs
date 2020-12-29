@@ -5,5 +5,6 @@ namespace API.DTOs
     public class ClassDetailsDto: ClassDto
     {
         public ICollection<ClassSubscription> StudentsSubscription { get; set; }
+        public int TeacherId { get; set; }
     }
 }

@@ -1,0 +1,84 @@
+<div class="container mt-2">
+    <div class="row">
+        <div class="col">
+            <mdb-card>
+                <!--Card content-->
+                <mdb-card-body class="px-lg-5 pt-5">
+
+                    <!-- Form -->
+                    <form [formGroup]="formSearch" (ngSubmit)="searchMembers()" class="text-center" style="color: #757575;">
+
+                        <div class="form-row">
+                            <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('level')" [label]="'Nivel'" [controlId]="'level'" [items]="levels"></app-select-input>
+                            </div>
+                            <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('gender')" [label]="'Género'" [controlId]="'gender'" [items]="genders"></app-select-input>
+                            </div>
+                            <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('role')" [label]="'Rol'" [controlId]="'role'" [items]="roles"></app-select-input>
+                            </div>
+                            <!-- <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('teacherId')" [label]="'Instructor'" [controlId]="'teacherId'" [items]="teachers"></app-select-input>
+                            </div> -->
+                            <div class="col-lg">
+
+                                <button mdbBtn type="submit" color="primary" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2 btn-block"><mdb-icon fas icon="search"></mdb-icon>Buscar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form -->
+
+                </mdb-card-body>
+
+            </mdb-card>
+        </div>
+    </div>
+    <div class="row mt-4" *ngIf="members && members.length > 0">
+        <ng-container *appHasRole="['Student','Teacher']">
+            <div class="col-md-4 col-lg-3 mb-3 animated fadeIn" *ngFor="let member of members">
+                <app-member-card [member]="member"></app-member-card>
+            </div>
+        </ng-container>
+        <div class="col" *appHasRole="['Admin','School']">
+
+            <mdb-card>
+                <mdb-card-body class="p-0 m-0">
+                    <table class="table table-inverse mb-0 table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Documento</th>
+                                <th>Edad</th>
+                                <th>Telefono</th>
+                                <th>Ciudad</th>
+                                <th>Nivel</th>
+                                <th class="d-none d-lg-table-cell">Alta</th>
+                                <th class="d-none d-lg-table-cell">Último Acceso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let member of members" class="animated fadeIn">
+                                <td scope="row"><img [src]="member | images : 'photoUrl'" class="img-thumbnail"></td>
+                                <td>{{member.firstName}}</td>
+                                <td>{{member.lastName}}</td>
+                                <td>{{member.documentType}} {{member.documentNumber}}</td>
+                                <td>{{member.age}}</td>
+                                <td>{{member.phoneNumber}}</td>
+                                <td>{{member.city}}</td>
+                                <td>{{member.level}}</td>
+                                <td class="d-none d-lg-table-cell">{{member.created | date : 'dd-MM-yy'}}</td>
+                                <td class="d-none d-lg-table-cell">{{member.lastActive | date : 'dd-MM-yy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mdb-card-body>
+            </mdb-card>
+
+        </div>
+    </div>
+
+</div>

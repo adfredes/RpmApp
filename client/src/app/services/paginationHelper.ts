@@ -10,7 +10,6 @@ const getHttpParams = <R>(tParams: R): HttpParams => {
         {
             if (tParams[prop] && tParams[prop] instanceof Date ){
             const value = `${tParams[prop].getMonth() + 1}-${tParams[prop].getDate()}-${tParams[prop].getFullYear()}`;
-            console.log(value);
             params = params.append(prop, value);
             }
             else

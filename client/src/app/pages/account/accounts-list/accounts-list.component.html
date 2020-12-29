@@ -1,0 +1,66 @@
+<div class="container mt-2">
+    <div class="row">
+        <div class="col">
+            <mdb-card>
+                <!--Card content-->
+                <mdb-card-body class="px-lg-5 pt-5">
+
+                    <!-- Form -->
+                    <form [formGroup]="formSearch" class="text-center" style="color: #757575;">
+
+                        <div class="form-row">
+                            <div class="col-md">
+                                <app-text-input [label]="'Nombre'" [controlId]="'firstName'" [formControl]="formSearch.get('firstName')"></app-text-input>
+                            </div>
+                            <div class="col-md">
+                                <app-text-input [label]="'Apellido'" [controlId]="'lastName'" [formControl]="formSearch.get('lastName')"></app-text-input>
+                            </div>
+                            <div class="col-md">
+                                <app-text-input [label]="'Usuario'" [type]="'text'" [controlId]="'username'" [formControl]="formSearch.get('userName')"></app-text-input>
+                            </div>
+                            <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('roleId')" [label]="'Rol'" [controlId]="'roleId'" [items]="roles"></app-select-input>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form -->
+
+                </mdb-card-body>
+
+            </mdb-card>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <mdb-card>
+                <mdb-card-body class="p-0 m-0">
+                    <table class="table table-inverse mb-0 table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th class="d-none d-lg-table-cell">Creado</th>
+                                <th class="d-none d-lg-table-cell">Último Acceso</th>
+                                <th>Roles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of usersFilter" class="animated fadeIn" (click)="viewUser(user)">
+                                <td scope="row">{{user.userName}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td class="d-none d-lg-table-cell">{{user.created | date : 'dd-MM-yy'}}</td>
+                                <td class="d-none d-lg-table-cell">{{user.lastActive | date : 'dd-MM-yy'}}</td>
+                                <td>
+                                    <span class="badge badge-info mr-1 p-2" *ngFor="let role of user.roles">{{role}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+
+    </div>
+</div>

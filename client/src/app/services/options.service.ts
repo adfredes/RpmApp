@@ -36,7 +36,7 @@ export class OptionsService {
     )
 
   getTeachers = () =>
-    this.levels ? of(this.teachers) :
+    this.teachers ? of(this.teachers) :
       this.http.get<Teacher[]>(`${this.apiUrl}member/teacher`)
         .pipe(tap(teachers => this.teachers = teachers))
 
@@ -44,8 +44,7 @@ export class OptionsService {
   getTeachersSelectCombo = (): Observable<SelectCombo[]> =>
     this.getTeachers().pipe(
       map((teachers: Teacher[]) =>
-      teachers.map((teacher: Teacher) => {
-          teacher.firstName = teacher.firstName.substring(0, 1);
+      teachers.map((teacher: Teacher) => {          
           return {value : teacher.id.toString(), text : `${teacher.lastName} ${teacher.firstName}`};
         })
       ),
