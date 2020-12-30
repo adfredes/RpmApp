@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Member } from 'src/app/models/member.interface';
 import { MembersParams } from 'src/app/models/members-params';
 import { getPaginatedResult } from 'src/app/services/paginationHelper';
+import { Payment } from '../models/payment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class MemberService {
 
   deletePhoto = (photoId: number) => {
     return this.http.delete(`${this.apiUrl}member/delete-photo/${photoId}`);
+  }
+
+  getPayments = () => {
+    return this.http.get<Payment[]>(`${this.apiUrl}member/list-payment`);
   }
 }

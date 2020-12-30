@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-center">Agregar Comprobante de Pago</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">    
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row mt-3 text-center ">
+            <div class="col ">
+                <form [formGroup]="formTicket" class="row" (ngSubmit)="submit()">
+                    <div class="col-12">
+                        <app-text-input [formControl]="formTicket.controls['amount']" [label]="'Monto'" [type]="'number'" [controlId]="'amount'"></app-text-input>
+                    </div>
+                    <div class="col-12">
+                        <app-text-input [formControl]="formTicket.controls['month']" [label]="'Mes'" [type]="'number'" [controlId]="'month'"></app-text-input>
+                    </div>
+                    <div class="col-12">
+                        <app-text-input [formControl]="formTicket.controls['year']" [label]="'Año'" [type]="'number'" [controlId]="'year'"></app-text-input>
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" type="file" ng2FileSelect [uploader]="uploader" style="overflow: hidden;" />
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit " class="btn btn-success btn-block " [disabled]="!uploader.getNotUploadedItems().length || formTicket.invalid ">
+                            <span class="fa fa-upload "></span> Subir
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

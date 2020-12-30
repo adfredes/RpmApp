@@ -21,6 +21,8 @@ namespace API.Data
 
         public DbSet<Class> Class { get; set; }
 
+        public DbSet<Payment> Payment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

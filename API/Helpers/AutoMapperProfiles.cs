@@ -55,6 +55,9 @@ namespace API.Helpers
             CreateMap<AppUser, UserAccountDto>()
             .ForMember(d => d.Roles, o => o.MapFrom(s => s.UserRoles.Select(r => r.Role.Name).ToList()));
 
+            CreateMap<Payment,PaymentDetailDto>()
+            .ReverseMap();
+
             /***************combo**************/
             CreateMap<AppRole, ComboDto>()
             .ForMember(d => d.value, o => o.MapFrom(s => s.Name))

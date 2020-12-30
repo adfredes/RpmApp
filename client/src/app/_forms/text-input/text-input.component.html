@@ -1,6 +1,6 @@
 <div class="md-form md-outline mt-0">
     <!-- [class.is-invalid]="isInvalidControl()" -->
-    <input [class.validate-error]="isInvalidControl()" [class.is-invalid]="isInvalidControl()" [id]="controlId" [type]="type" class="form-control" [formControl]="ngControl.control" mdbInput>
+    <input autocomplete="false" [class.validate-error]="isInvalidControl()" [class.is-invalid]="isInvalidControl()" [id]="controlId" [type]="type" class="form-control" [formControl]="ngControl.control" mdbInput>
     <label [for]="controlId">{{label}}</label>
     <mdb-error *ngIf="isInvalidControl()">
         <span *ngIf="ngControl.control.errors?.required" class="is-invalid">El campo {{label}} es requerido</span>

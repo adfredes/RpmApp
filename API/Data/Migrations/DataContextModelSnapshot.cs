@@ -269,6 +269,34 @@ namespace API.Data.Migrations
                     b.ToTable("Levels");
                 });
 
+            modelBuilder.Entity("API.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TicketUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UploadDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Payment");
+                });
+
             modelBuilder.Entity("API.Entities.StudentClass", b =>
                 {
                     b.Property<int>("UserId")
@@ -441,6 +469,13 @@ namespace API.Data.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("API.Entities.Payment", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("API.Entities.StudentClass", b =>
                 {
                     b.HasOne("API.Entities.Class", "Class")
@@ -504,6 +539,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("Classes");
+
+                    b.Navigation("Payments");
 
                     b.Navigation("Photos");
 

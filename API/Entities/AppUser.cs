@@ -27,5 +27,6 @@ namespace API.Entities
 
         public ICollection<StudentClass> StudentsClass { get; set; }
         public ICollection<Class> Classes { get; set; }
+        public ICollection<Payment> Payments { get; set; }
     }
 }

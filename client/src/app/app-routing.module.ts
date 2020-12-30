@@ -14,6 +14,8 @@ import { MemberEditComponent } from './pages/members/member-edit/member-edit.com
 import { AdminGuard } from './guards/admin.guard';
 import { AccountsListComponent } from './pages/account/accounts-list/accounts-list.component';
 import { MembersListComponent } from './pages/members/members-list/members-list.component';
+import { PaymentsAddComponent } from './pages/payments/payments-add/payments-add.component';
+import { PaymentsListComponent } from './pages/payments/payments-list/payments-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -43,6 +45,14 @@ const routes: Routes = [
     children: [
       {path: 'edit', component: MemberEditComponent},
       {path: 'list', component: MembersListComponent}
+    ]
+  },  
+  {
+    path: 'payments',
+    canActivate: [AuthGuard],    
+    children: [
+      {path: 'add', component: PaymentsAddComponent},
+      {path: 'list', component: PaymentsListComponent}
     ]
   },
   

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201112161720_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201229214642_FixPayments")]
+    partial class FixPayments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,6 +214,7 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quota")
+                        .IsConcurrencyToken()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TeacherId")
@@ -268,6 +269,34 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
+                });
+
+            modelBuilder.Entity("API.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TicketUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UploadDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("API.Entities.StudentClass", b =>
@@ -442,6 +471,13 @@ namespace API.Data.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("API.Entities.Payment", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("API.Entities.StudentClass", b =>
                 {
                     b.HasOne("API.Entities.Class", "Class")
@@ -505,6 +541,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("Classes");
+
+                    b.Navigation("Payments");
 
                     b.Navigation("Photos");
 

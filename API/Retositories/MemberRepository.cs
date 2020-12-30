@@ -42,8 +42,9 @@ namespace API.Retositories
 
         public async Task<AppUser> GetMemberByUsernameAsync(string username)
         {
-            return await dataContext.Users
-                        .Include(p => p.Photos)
+            return await dataContext.Users            
+                        .Include(p => p.Payments)                        
+                        .Include(p => p.Photos)                                            
                         .SingleOrDefaultAsync(user => user.UserName == username);
         }
 

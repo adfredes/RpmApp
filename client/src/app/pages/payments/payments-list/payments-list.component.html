@@ -1,0 +1,72 @@
+<div class="container mt-2">
+
+    <div class="row">
+        <div class="col">
+            <mdb-card>
+                <!--Card content-->
+                <mdb-card-body class="px-lg-5 pt-5">
+
+                    <!-- Form -->
+                    <form [formGroup]="formSearch" (ngSubmit)="search()" class="text-center" style="color: #757575;">
+
+                        <div class="form-row">
+                            <div class="col-md">
+                                <app-text-input [label]="'Mes'" [controlId]="'month'" [type]="'number'" [formControl]="formSearch.get('month')"></app-text-input>
+                            </div>
+                            <div class="col-md">
+                                <app-text-input [label]="'Año'" [controlId]="'year'" [type]="'number'" [formControl]="formSearch.get('year')"></app-text-input>
+                            </div>
+                            <!-- <div class="col-md">
+                                <app-select-input [formControl]="formSearch.get('roleId')" [label]="'Rol'" [controlId]="'roleId'" [items]="roles"></app-select-input>
+                            </div> -->
+                            <div class="col-lg">
+                                <div>
+                                    <div class="float-left w-50">
+                                        <button mdbBtn type="submit" color="primary" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2 btn-block">
+                            <mdb-icon fas icon="search"></mdb-icon></button>
+                                    </div>
+                                    <div class="float-right w-50" *appHasRole="['Student']">
+                                        <button mdbBtn type="button" color="success" outline="true" mdbWavesEffect class="btn-rounded pt-2 pb-2 btn-block" (click)="openAddModal()">
+                                            <mdb-icon fas icon="plus"></mdb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form -->
+
+                </mdb-card-body>
+
+            </mdb-card>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col" *ngIf="paymentsFilter && paymentsFilter.length > 0; else notPayments">
+            <table class="table table-striped table-inverse">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Cuota</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payment of paymentsFilter">
+                        <td scope="row">{{payment.paymentDate | date:'MMMM yyyy' | titlecase}}</td>
+                        <td>{{payment.uploadDate | date:'dd/MM/yy hh:mm'}}</td>
+                        <td>{{payment.amount | currency:'ARS'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #notPayments>
+            <div class="col">
+                <div class="alert">
+                    No se encontraron pagos.
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

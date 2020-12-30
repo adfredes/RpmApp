@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
-import { PagosComponent } from './pages/pagos/pagos.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { ErrorsInterceptor } from './_interceptors/errors.interceptor';
 import { ChangePasswordComponent } from './pages/account/change-password/change-password.component';
@@ -34,14 +33,15 @@ import { MembersListComponent } from './pages/members/members-list/members-list.
 import { MemberCardComponent } from './pages/members/member-card/member-card.component';
 import { ClassFormComponent } from './pages/class/class-form/class-form.component';
 import { ModalEditComponent } from './pages/class/modals/modal-edit.component';
+import { PaymentsListComponent } from './pages/payments/payments-list/payments-list.component';
+import { PaymentsAddComponent } from './pages/payments/payments-add/payments-add.component';
 
 registerLocaleData(localEsAr);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    PagosComponent,
+    HomeComponent,    
     ChangePasswordComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
@@ -61,7 +61,9 @@ registerLocaleData(localEsAr);
     MembersListComponent,
     MemberCardComponent,
     ClassFormComponent,
-    ModalEditComponent
+    ModalEditComponent,
+    PaymentsListComponent,
+    PaymentsAddComponent
   ],
   imports: [
     BrowserModule,
