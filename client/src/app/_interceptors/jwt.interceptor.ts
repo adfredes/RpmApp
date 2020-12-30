@@ -33,8 +33,7 @@ export class JwtInterceptor implements HttpInterceptor {
     this.bussyService.busy();
 
     return next.handle(request)
-      .pipe(
-        delay(1000),
+      .pipe(        
         finalize(() => this.bussyService.iddle())
       );
   }
