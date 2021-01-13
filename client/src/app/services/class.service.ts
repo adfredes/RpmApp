@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { userInfo } from 'os';
 import { User } from 'src/app/models/user.interface';
+import { ClassEdit } from '../models/classEdit';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,9 @@ export class ClassService {
     newClass[`dateOfClass`].setMinutes(newClass[`beginTime`].getMinutes());
     return this.http.post(`${this.apiUrl}class`, newClass);
   }
+
+  suspendClass = (id: number, suspended: boolean) => 
+    this.http.put(`${this.apiUrl}class/${id}/suspend/${suspended}`, {});
 
   createHubConnection(classId: number, user: User): void {
     this.hubConnection = new HubConnectionBuilder()
@@ -58,6 +62,12 @@ export class ClassService {
 
   async setStudentAsist(classId: number, studentId: number, isAsist: boolean): Promise<any>{
     return this.hubConnection.invoke('StudentAsist', classId, studentId, isAsist);
+  }
+
+  async updateClass(classId: number, values){
+    const leason: ClassEdit = ClassEdit.getNew(classId, values);            
+    console.log(leason);
+    return this.hubConnection.invoke('EditClass', leason);
   }
 
   stopHubConnection(): void {

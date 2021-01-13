@@ -17,6 +17,7 @@ namespace API.Entities
         public ICollection<StudentClass> StudentsClass { get; set; }        
         public int TeacherId { get; set; }
         public AppUser Teacher { get; set; }
+        public bool Suspended { get; set; } = false;
 
 
     }

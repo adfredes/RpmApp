@@ -9,5 +9,6 @@ namespace API.DTOs
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public string TicketUrl { get; set; }         
+        public string Member { get; set; }
     }
 }

@@ -37,4 +37,8 @@ export class MemberService {
   getPayments = () => {
     return this.http.get<Payment[]>(`${this.apiUrl}member/list-payment`);
   }
+
+  deletePayment = (id: number) => {
+    return this.http.delete(`${this.apiUrl}member/delete-payment/${id}`);
+  }
 }

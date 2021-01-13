@@ -19,7 +19,9 @@ namespace API.Retositories
 
         public ILevelRepository LevelRepository => new LevelRepository(context, mapper);
 
-        public IMemberRepository MemberRepository => new MemberRepository(context, mapper);        
+        public IMemberRepository MemberRepository => new MemberRepository(context, mapper);
+
+        public IPaymentRepository PaymentRepository => new PaymentRepository(context, mapper);
 
         public async Task<bool> Complete()
         {

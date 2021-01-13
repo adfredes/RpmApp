@@ -63,18 +63,17 @@ export class ClassFormComponent implements OnInit {
     });
 
   setForm = () => {
-    if(this.clase) { 
-      console.dir(this.clase);
+    if(this.clase) {           
       const teacherId =  this.teachers.find(t => t.text === this.clase.teacher).value;
-      const levelId = this.levels.find(l => l.text === this.clase.level).value;      
-      this.clase.dateOfClass = new Date(this.clase.dateOfClass);      
-      this.formClass.patchValue({... this.clase, teacherId, levelId, beginTime : this.clase.dateOfClass});
+      const levelId = this.levels.find(l => l.text === this.clase.level).value;            
+      this.formClass.patchValue({... this.clase, teacherId, levelId, beginTime : this.clase.dateOfClass, dateOfClass: new Date(this.clase.dateOfClass)});
     }
   }
 
   submit = () => {
     this.formClass.markAllAsTouched();
     if (this.formClass.invalid) {
+      console.log(this.formClass.errors);
       return;
     }
     this.onSubmit.emit(this.formClass.value);    

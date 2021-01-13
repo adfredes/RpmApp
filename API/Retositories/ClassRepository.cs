@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
@@ -66,6 +67,8 @@ namespace API.Retositories
                 query = query.Where(c => c.TeacherId == classParams.TeacherId.Value);
             }       
 
+            // query = query.Where(c => c.Suspended == classParams.Suspended);
+
             return await PagedList<ClassDto>.CreateAsync(query.ProjectTo<ClassDto>(mapper.ConfigurationProvider), classParams.PageNumber, classParams.PageSize);
         }
 
@@ -125,9 +128,28 @@ namespace API.Retositories
             leason.StudentsClass.Remove(subscription);
         }
 
+        public async Task Suspend(int classId, bool suspend = true)
+        {
+            var leason = await context.Class.FirstOrDefaultAsync(c => c.Id == classId);
+            if(leason != null)
+            {
+                leason.Suspended = suspend;
+            }            
+        }
+
         public void Update(Class _class)
         {
             context.Entry(_class).State = EntityState.Modified;
+        }
+
+           public async Task UpdateClass(ClassEditDto classDto)
+        {            
+            var leason = await context.Class.FirstOrDefaultAsync(c => c.Id == classDto.Id);
+            leason.Quota += classDto.Capacity -  leason.Capacity;
+            if (leason.Quota < 0){
+                throw new ValidationException("No es posible modificar la clase, hay mas alumnos inscriptos que la capacidad seleccionada.");
+            }
+            mapper.Map(classDto, leason);
         }
     }
 }

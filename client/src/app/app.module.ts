@@ -35,6 +35,13 @@ import { ClassFormComponent } from './pages/class/class-form/class-form.componen
 import { ModalEditComponent } from './pages/class/modals/modal-edit.component';
 import { PaymentsListComponent } from './pages/payments/payments-list/payments-list.component';
 import { PaymentsAddComponent } from './pages/payments/payments-add/payments-add.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { appReducers } from './store/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { EffectsArray } from './store/effects';
+import { PagesComponent } from './pages/pages.component';
 
 registerLocaleData(localEsAr);
 
@@ -63,7 +70,8 @@ registerLocaleData(localEsAr);
     ClassFormComponent,
     ModalEditComponent,
     PaymentsListComponent,
-    PaymentsAddComponent
+    PaymentsAddComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +81,10 @@ registerLocaleData(localEsAr);
     HttpClientModule,
     ReactiveFormsModule,
     CustomFormsModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot(EffectsArray)
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

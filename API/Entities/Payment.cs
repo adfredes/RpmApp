@@ -11,5 +11,7 @@ namespace API.Entities
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public string TicketUrl { get; set; }
+        public int AppUserId { get; set; }
+        public AppUser Member { get; set; }
     }
 }

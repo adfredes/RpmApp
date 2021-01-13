@@ -41,6 +41,18 @@ namespace API.SignalR
              
         }
 
+        public async Task EditClass(ClassEditDto leason)
+        {
+            
+            try{
+                await unitOfWork.ClassRepository.UpdateClass(leason);
+                await unitOfWork.Complete();
+            }catch (Exception ex){
+                throw ex;
+            }
+            await EmmitUpdateClassToGroup(leason.Id);
+        }
+
         public async Task SubscribeClass(int classid){
             var userId = Context.User.GetUserId();
             do
@@ -58,9 +70,7 @@ namespace API.SignalR
             //     if(await unitOfWork.Complete()){
             //         await EmmitUpdateClassToGroup(classid);
             //     }
-            // }
-            
-
+            // }            
         }
 
         public async Task UnsubscribeClass(int classid){

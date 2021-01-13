@@ -3,6 +3,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using AutoMapper;
+using AutoMapper.Configuration.Conventions;
 
 namespace API.Helpers
 {
@@ -10,6 +11,9 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
+
+            AddMemberConfiguration().AddName<CaseInsensitiveName>();
+
             CreateMap<RegisterDto, AppUser>();
 
             CreateMap<CreateClassDto, Class>()
@@ -51,11 +55,15 @@ namespace API.Helpers
             .ForMember(d => d.Teacher, o => o.MapFrom(s => $"{s.Teacher.FirstName} {s.Teacher.LastName}"))
             .ForMember(d => d.TeacherPhotoUrl, o => o.MapFrom(s => s.Teacher.Photos.Where(p => p.IsAvatar == true).Select(p => p.Url).FirstOrDefault()))
             .ForMember(d => d.StudentsSubscription, o => o.MapFrom(s => s.StudentsClass));
+
+            CreateMap<Class, ClassEditDto>()
+            .ReverseMap();
             
             CreateMap<AppUser, UserAccountDto>()
             .ForMember(d => d.Roles, o => o.MapFrom(s => s.UserRoles.Select(r => r.Role.Name).ToList()));
 
             CreateMap<Payment,PaymentDetailDto>()
+            .ForMember(d => d.Member, o => o.MapFrom(s => $"{s.Member.LastName} {s.Member.FirstName}"))
             .ReverseMap();
 
             /***************combo**************/

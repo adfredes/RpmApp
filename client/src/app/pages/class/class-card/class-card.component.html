@@ -4,6 +4,9 @@
         <h5 class="card-title">{{class.dateOfClass | date : 'EEEE dd' | titlecase}} de {{class.dateOfClass | date : 'MMMM'}}</h5>
         <h6>{{class.dateOfClass | date : 'HH:mm'}} HS - <small>{{class.level}}</small></h6>
         <p>Instructor: <small>{{class.teacher}}</small></p>
+        <p *ngIf="class.suspended">
+            <span class="badge badge-danger">Suspendida</span>
+        </p>
         <p class="card-text">
             <ng-container *ngIf="!isClose; else isCloseTemplate">
                 <small>Cupos </small><span class="badge badge-danger" *ngIf="class.quota <= 0">Agotados</span>
@@ -17,7 +20,7 @@
     </div>
     <ul class="list-inline member-icons animate text-center">
         <ng-container *appHasRole="['School','Admin','Teacher']">
-            <li class="list-inline-item" (click)="toDetail()">
+            <li class="list-inline-item" (click)="toDetail()" *ngIf="!isClose">
                 <button class="btn btn-success waves-light" mdbTooltip="Ver" placement="top" mdbWavesEffect>
                     <i class="fa fa-eye"></i>
                 </button>
@@ -30,8 +33,8 @@
             </li>
 
             <li class="list-inline-item" *ngIf="!isClose">
-                <button class="btn btn-danger waves-light" mdbTooltip="Suspender" placement="top" mdbWavesEffect>
-                    <i class="fa fa-times"></i>
+                <button [class.btn-danger]="!class.suspended" [class.btn-success]="class.suspended" class="btn waves-light" [mdbTooltip]="class.suspended?'Habilitar':'Suspender'" placement="top" (click)="suspendClass()" mdbWavesEffect>
+                    <i [class.fa-check]="class.suspended" [class.fa-times]="!class.suspended" class="fa"></i>
                 </button>
             </li>
         </ng-container>

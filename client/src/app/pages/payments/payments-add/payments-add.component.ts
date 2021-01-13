@@ -9,6 +9,10 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducers';
+import * as actions from 'src/app/store/actions/payments.actions';
+import { Payment } from 'src/app/models/payment.interface';
 
 @Component({
   selector: 'app-payments-add',
@@ -17,7 +21,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class PaymentsAddComponent implements OnInit, OnDestroy {
   
-  public onAdd = new Subject<boolean>();
+  // public onAdd = new Subject<boolean>();
 
   uploader: FileUploader;
   hasBaseDropzoneOver = false;
@@ -30,7 +34,8 @@ export class PaymentsAddComponent implements OnInit, OnDestroy {
               private memberService: MemberService,
               private toastr: ToastrService,
               private fb: FormBuilder,
-              public bsModalRef: BsModalRef) {
+              public bsModalRef: BsModalRef,
+              private store: Store<AppState>) {
     this.accountService.currentUser$.pipe(take(1))
       .subscribe(user => this.user = user);
   }
@@ -83,9 +88,11 @@ export class PaymentsAddComponent implements OnInit, OnDestroy {
 
     this.uploader.onSuccessItem = (item, response, status, header) => {
       if (response){
+        const payment: Payment = JSON.parse(response);
+        this.store.dispatch(actions.addPayment({payment}));
         this.toastr.success('Comprobante cargado.')
-        this.onAdd.next(true);
-        this.onAdd.unsubscribe();
+        // this.onAdd.next(true);
+        // this.onAdd.unsubscribe();        
         this.bsModalRef.hide();
         //const photo: Photo = JSON.parse(response);
                 

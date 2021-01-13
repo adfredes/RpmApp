@@ -9,5 +9,6 @@ namespace API.Helpers
         public int? LevelId { get; set; }
         public int? StudentId { get; set; }
         public int? TeacherId { get; set; }
+        public bool Suspended { get; set; }
     }
 }

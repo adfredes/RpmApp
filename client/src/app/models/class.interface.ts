@@ -8,6 +8,7 @@ export interface Class{
     teacherId: number;
     teacher: string;
     teacherPhotoUrl: string;
+    suspended: boolean;
     studentsSubscription: StudenSubscription[];
 }
 

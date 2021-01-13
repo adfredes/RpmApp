@@ -5,6 +5,10 @@ import { SelectCombo } from 'src/app/models/select-combo.interface';
 import { ClassService } from 'src/app/services/class.service';
 import { OptionsService } from 'src/app/services/options.service';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducers';
+import { addedClass } from 'src/app/store/actions';
+import { Class } from 'src/app/models/class.interface';
 
 @Component({
   selector: 'app-class-add',
@@ -13,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ClassAddComponent implements OnInit {
   @Input() onClose;  
-  constructor(private classService: ClassService, private toastr: ToastrService) {      
+  constructor(private classService: ClassService, private toastr: ToastrService, private store: Store<AppState>) {      
   }
   
 
@@ -24,7 +28,8 @@ export class ClassAddComponent implements OnInit {
 
   onSubmit = (values) => {    
     this.classService.addClass(values)
-      .subscribe(() => {
+      .subscribe((leason: Class) => {        
+        this.store.dispatch(addedClass({leason}))
         this.toastr.success('Clase agregada');
         this.close();
       });

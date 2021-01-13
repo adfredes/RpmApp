@@ -171,10 +171,22 @@ namespace API.Controllers
 
         [HttpGet("list-payment")]
         public async Task<ActionResult<IEnumerable<PaymentDetailDto>>> ListPayment()
-        {
-            var user = await unitOfWork.MemberRepository.GetMemberByUsernameAsync(User.GetUsername());
-            var payments = mapper.Map<IEnumerable<PaymentDetailDto>>(user.Payments.OrderByDescending(p => p.PaymentDate));
+        {            
+            var payments = await unitOfWork.PaymentRepository.GetPaymentsByMemberIdAsync(User.GetUserId());
             return Ok(payments);
+        }
+
+        [HttpDelete("delete-payment/{id}")]
+        public async Task<ActionResult> DeletePayment(int id){
+            var paymentDto = await unitOfWork.PaymentRepository.GetPaymentAsync(id);
+            if(paymentDto== null) return NotFound("Pago no encontrado");            
+            await unitOfWork.PaymentRepository.DeletePayment(paymentDto.Id);
+
+            if(await unitOfWork.Complete()){
+                return NoContent();
+            }
+
+            throw new System.Exception("Error al eliminar el comprobante");
         }
     }
 }

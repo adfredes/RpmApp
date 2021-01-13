@@ -50,20 +50,29 @@
                         <th>Cuota</th>
                         <th>Fecha</th>
                         <th>Monto</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let payment of paymentsFilter">
+                    <tr *ngFor="let payment of paymentsFilter" class="animated fadeIn">
                         <td scope="row">{{payment.paymentDate | date:'MMMM yyyy' | titlecase}}</td>
                         <td>{{payment.uploadDate | date:'dd/MM/yy hh:mm'}}</td>
                         <td>{{payment.amount | currency:'ARS'}}</td>
+                        <td>
+                            <button class="btn btn-link m-0 pt-1 pb-1 pl-3 pr-3" [mdbTooltip]="'Eliminar'" placement="top " (click)="eliminarPayment(payment) " mdbWavesEffect>
+                            <i class="fa fa-trash text-danger"></i>
+                            </button>
+                            <button class="btn btn-link m-0 pt-1 pb-1 pl-3 pr-3" [mdbTooltip]="'Eliminar'" placement="top " (click)="descargarPayment(payment) " mdbWavesEffect>
+                            <i class="fa fa-file-download text-success"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ng-template #notPayments>
-            <div class="col">
-                <div class="alert">
+            <div class="col ">
+                <div class="alert ">
                     No se encontraron pagos.
                 </div>
             </div>

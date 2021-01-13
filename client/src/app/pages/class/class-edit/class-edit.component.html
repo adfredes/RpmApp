@@ -1,1 +1,1 @@
-<app-class-form [clase]="clase"></app-class-form>
+<app-class-form [clase]="clase" (onClose)="onClose.emit()" (onSubmit)="onSubmit($event)"></app-class-form>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using API.Extensions;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace API.Controllers
 {
@@ -41,15 +42,43 @@ namespace API.Controllers
         {
             var newClass = mapper.Map<Class>(createClassDto);
             unitOfWork.ClassRepository.Add(newClass);
-            if (await unitOfWork.Complete()) return Ok(mapper.Map<ClassDto>(newClass));
+            if (await unitOfWork.Complete()) return Ok(await unitOfWork.ClassRepository.GetClassAsync(newClass.Id));
             return BadRequest("Fallo al agregar la nueva clase");
-        }        
+        }
+
+        // [HttpPut]
+        // public async Task<ActionResult<ClassDto>> EditClass(ClassEditDto classDto)
+        // {
+        //     try{
+        //         await unitOfWork.ClassRepository.UpdateClass(classDto);            
+        //         if (await unitOfWork.Complete()) return Ok(await unitOfWork.ClassRepository.GetClassAsync(classDto.Id));
+        //         return BadRequest("Fallo al agregar la nueva clase");
+        //     }catch(Exception ex){
+        //         return BadRequest(ex.ToString());
+        //     }
+            
+        // }        
+
+         // try{
+            //     await unitOfWork.ClassRepository.UpdateClass(classDto);
+            //     await unitOfWork.Complete();
+            // }catch (Exception ex){
+            //     throw ex;
+            // }
+            // await EmmitUpdateClassToGroup(classDto.Id);
 
         [HttpGet("level")]
         public async Task<ActionResult<ICollection<LevelDto>>> GetLevels()
         {
             var levels = mapper.Map<List<LevelDto>>(await unitOfWork.LevelRepository.GetLevelsAsync());
             return Ok(levels);
+        }
+
+        [HttpPut("{id}/suspend/{suspended}")]
+        public async Task<ActionResult> SuspendClass(int id, bool suspended){
+            await unitOfWork.ClassRepository.Suspend(id, suspended);
+            if (await unitOfWork.Complete()) return Ok();            
+            return BadRequest("Fallo al suspender la clase");
         }
         
         

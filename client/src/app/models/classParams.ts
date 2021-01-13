@@ -5,7 +5,8 @@ export class ClassParams extends PaginationParams{
     constructor(public beginDate: Date = null,
                 public endDate: Date = null,
                 public levelId: number = 0,
-                public teacherId: number = 0)
+                public teacherId: number = 0,
+                public suspended: boolean = false)
     {
         super();
         if (!this.beginDate)
